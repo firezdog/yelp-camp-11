@@ -42,7 +42,13 @@ router.post(
     }),
     function(req, res){
         req.flash('greeting',`Welcome back, ${req.user.username}!`);
-        res.redirect('/campgrounds');
+        if (!req.session.whence) {
+            res.redirect('/campgrounds');
+        } else {
+            var whence = req.session.whence;
+            req.session.whence = "";
+            res.redirect(whence);
+        }
 });
     
 //LOGOUT

@@ -7,6 +7,7 @@ var self = {
         if(req.isAuthenticated()) {
             return next();
         }
+        req.session.whence = req.originalUrl;
         req.flash('problem','You must be logged in to do that.');
         return res.redirect("/login");
     },
@@ -15,6 +16,7 @@ var self = {
         //cannot replace with self.isLoggedIn b/c the logic is different (next call f--s up the asynchronous calls)
         if (!req.isAuthenticated()) {
             req.flash('problem','You must be logged in to do that.');
+            req.session.whence = req.originalUrl;
             return res.redirect("/login");
         }
         var id = req.params.id;
@@ -35,6 +37,8 @@ var self = {
 
     isCommentOwner: (req, res, next) => {
         if (!req.isAuthenticated()) {
+            req.flash('problem','You must be logged in to do that.');
+            req.session.whence = req.originalUrl;
             return res.redirect("/login");
         }
         var commentId = req.params.comment_id;
@@ -47,7 +51,7 @@ var self = {
                 if (!comment.author.id.equals(req.user.id)) 
                     { 
                         req.flash('problem','You are not the author of this comment!');
-                        return res.redirect("back"); 
+                        return res.redirect("back");
                     } 
                 else { return next(); }
             }
