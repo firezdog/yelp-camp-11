@@ -12,7 +12,8 @@ var check = require('../middleware');
 router.get("/new", check.isLoggedIn, function(req, res) {
     Campground.findById(req.params.id, function(err, campground) {
         if (err) {
-            console.log(err);
+            req.flash('problem','Problem finding campground.')
+            res.redirect('back')
         } else {
         res.render("comments/new", {campground: campground});
         }
@@ -24,13 +25,14 @@ router.post("/", check.isLoggedIn, function(req, res) {
     //lookup campground using ID
     Campground.findById(req.params.id, function(err, campground) {
         if (err) {
-            console.log(err);
+            req.flash('problem', 'Problem finding campground.')
+            res.redirect('back')
         } else {
             //create new comment
             Comment.create(req.body.comment, function(err, comment) {
                 if (err) {
-                    console.log(err);
-                    res.redirect('/campgrounds');
+                    req.flash('problem', 'Problem adding comment.')
+                    res.redirect('back');
                 } else {
                     // first add username and id
                     comment.author.id = req.user.id;
@@ -53,11 +55,13 @@ router.get("/:comment_id/edit", check.isCommentOwner, function(req,res){
     const commentId = req.params.comment_id;
     Campground.findById(campId, function(err, campground){
         if(err){
+            req.flash('problem', 'Problem finding campground.')
             res.redirect("back");
         } else {
             Comment.findById(commentId, function(err, comment){
                 if(err){
-                    res.redirect("back");
+                    req.flash('problem', 'Problem finding comment.')
+                    res.redirect('back')
                 } else {
                     res.render("comments/edit", {comment,campground});
                 }
@@ -72,6 +76,7 @@ router.put("/:comment_id/update", check.isCommentOwner, function(req,res){
     const commentId = req.params.comment_id;
     Comment.findByIdAndUpdate(commentId, req.body.comment, function(err){
         if(err){
+            req.flash('problem', 'Problem finding comment.')
             res.redirect("back");
         } else {
             res.redirect(`/campgrounds/${campId}`);
@@ -85,8 +90,10 @@ router.delete("/:comment_id/delete", check.isCommentOwner, function(req,res){
     const commentId = req.params.comment_id;
     Comment.findByIdAndRemove(commentId, function(err){
         if(err){
+            req.flash('problem','Problem removing comment.')
             res.redirect("back");
         } else {
+            req.flash('greeting','Comment deleted.')
             res.redirect(`/campgrounds/${campId}`);
         }
     });

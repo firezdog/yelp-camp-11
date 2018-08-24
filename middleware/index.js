@@ -25,6 +25,10 @@ var self = {
                 req.flash('problem','There was a problem -- sorry.');
                 return res.redirect("back");
             } else {
+                if (!campground) {
+                    req.flash('problem','Campground not found.')
+                    return res.redirect('back')
+                }
                 // needs check for undefined b/c not all cg's have authors (seed)
                 if (typeof campground.author == 'undefined' || !campground.author.id.equals(req.user.id)) {
                     req.flash('problem','You are not the owner of this campground.');
@@ -48,12 +52,14 @@ var self = {
                 res.redirect("back"); 
             } 
             else {
-                if (!comment.author.id.equals(req.user.id)) 
-                    { 
-                        req.flash('problem','You are not the author of this comment!');
-                        return res.redirect("back");
-                    } 
-                else { return next(); }
+                if (!comment) {
+                    req.flash('problem','Comment not found.')
+                    return res.redirect('back')
+                }
+                if (!comment.author.id.equals(req.user.id)) { 
+                    req.flash('problem','You are not the author of this comment!');
+                    return res.redirect("back");
+                } else { return next(); }
             }
         });
     }

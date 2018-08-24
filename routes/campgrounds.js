@@ -7,7 +7,8 @@ var check = require('../middleware');
 router.get("/", function(req, res) {
     Campground.find({}, function(err, campgrounds){
         if(err) {
-            console.log(err);
+            req.flash('problem', 'Problem getting campgrounds.')
+            res.redirect('back')
         }
         else {
             res.render("campgrounds/index", {campgrounds});
@@ -29,7 +30,8 @@ router.post("/", check.isLoggedIn, function(req, res) {
     var newCampground = {name: name, image: image, description: description, author: author};
     Campground.create(newCampground, function(err, campground) {
         if(err) {
-            console.log(err);
+            req.flash('problem', 'Problem creating campground.')
+            res.redirect('back')
         }
         else {
             campground.author.id = req.user.id;
@@ -45,7 +47,8 @@ router.get("/:id/edit", check.isCampOwner, function(req,res){
     var id = req.params.id;
     Campground.findById(id, function(err, campground){
         if(err) {
-            console.log(err);
+            req.flash('problem', 'Problem finding campground.')
+            res.redirect('back')
         } else {
             res.render("campgrounds/edit", {campground});
         }
@@ -57,7 +60,7 @@ router.put("/:id/update", check.isCampOwner, function(req,res) {
     var id = req.params.id;
     Campground.findByIdAndUpdate(id,req.body, function(err) {
         if (err) {
-            console.log(err);
+            req.flash('problem', 'Problem updating campground.')
             res.redirect("back");
         }
         else {
@@ -73,7 +76,7 @@ router.delete("/:id/delete", check.isCampOwner, function(req,res){
     var id = req.params.id;
     Campground.findByIdAndRemove(id, function(err){
         if(err){
-            console.log(err);
+            req.flash('problem', 'Problem updating data.')
             res.redirect("/campgrounds");
         } else {
             res.redirect("/campgrounds");
@@ -85,8 +88,13 @@ router.delete("/:id/delete", check.isCampOwner, function(req,res){
 router.get("/:id", function(req, res) {
     Campground.findById(req.params.id).populate("comments").exec(function(err, foundCampground){
         if(err){
-            console.log(err);
+            req.flash('problem', 'Problem getting campground.')
+            res.redirect('/campgrounds')
         } else {
+            if (!foundCampground) {
+                req.flash('problem','Campground not found.')
+                return res.redirect('back')
+            }
             res.render("campgrounds/show", {campground: foundCampground});
         }
     });
