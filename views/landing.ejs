@@ -8,9 +8,17 @@
 </head>
 <body>
 
-    <div id="welcome-message">
+    <div class="container" id="welcome-message" style="position: absolute; z-index: 1">
         <h1>Welcome To YelpCamp</h1>
-        <button class="btn btn-primary">See Campsites</button>
+        <a href="/campgrounds"><button class="btn btn-primary">See Campsites</button></a>
+    </div>
+
+    <div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel" interval="500">
+        <div class="carousel-inner">
+            <div class="carousel-item active" style="background-size: cover; width: 600px; height: 1000px; background-image: url('/landing_images/camp1.jpg')"></div>
+            <div class="carousel-item">Hello</div>
+            <div class="carousel-item">Goodbye</div>
+        </div>
     </div>
 
     <link rel="stylesheet" href="/stylesheets/landing.css"/>
