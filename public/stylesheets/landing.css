@@ -1,5 +1,22 @@
 #welcome-message {
     margin-top: 20%;
     text-align: center;
+    color: white;
 }
 
+#welcome-message button {
+    background-color: purple;
+    border-color: black;
+}
+
+.shadowed {
+    text-shadow: 2px 2px black;
+}
+
+.carousel-item {
+    background-color: #011315;
+    background-position: center; 
+    background-repeat: no-repeat;
+    background-size: contain; 
+    height: 100vh;
+}

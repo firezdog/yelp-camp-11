@@ -8,16 +8,18 @@
 </head>
 <body>
 
-    <div class="container" id="welcome-message" style="position: absolute; z-index: 1">
-        <h1>Welcome To YelpCamp</h1>
-        <a href="/campgrounds"><button class="btn btn-primary">See Campsites</button></a>
+    <div class="container-fluid" id="welcome-message" style="position: absolute; z-index: 1">
+        <h1 class="shadowed">Welcome To YelpCamp</h1>
+        <a href="/campgrounds"><button class="btn btn-primary shadowed">See Campsites</button></a>
     </div>
 
-    <div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel" interval="500">
+    <div id="camp-carousel" class="carousel slide" data-ride="carousel">
         <div class="carousel-inner">
-            <div class="carousel-item active" style="background-size: cover; width: 600px; height: 1000px; background-image: url('/landing_images/camp1.jpg')"></div>
-            <div class="carousel-item">Hello</div>
-            <div class="carousel-item">Goodbye</div>
+            <div class="carousel-item active" style="background-image: url('/landing_images/camp1.jpeg')"></div>
+            <div class="carousel-item" style="background-image: url('/landing_images/camp2.jpeg')"></div>
+            <div class="carousel-item" style="background-image: url('/landing_images/camp3.jpeg')"></div>
+            <div class="carousel-item" style="background-image: url('/landing_images/camp4.jpeg')"></div>
+            <div class="carousel-item" style="background-image: url('/landing_images/camp5.jpeg')"></div>
         </div>
     </div>
 
