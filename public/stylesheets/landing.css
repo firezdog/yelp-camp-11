@@ -1,3 +1,7 @@
+.darkBackground {
+    background-color: #011315;
+}
+
 #welcome-message {
     margin-top: 20%;
     text-align: center;
@@ -18,5 +22,11 @@
     background-position: center; 
     background-repeat: no-repeat;
     background-size: contain; 
-    height: 100vh;
+    margin-top: 3%;
+    height: 85vh;
+}
+
+.alert {
+    text-align: center;
+    font-size: 1.25em;
 }

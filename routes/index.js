@@ -2,10 +2,19 @@ var express = require('express');
 var router = express.Router();
 var passport = require('passport');
 var User = require('../models/user');
+var Campground = require('../models/campgrounds');
+var _ = require ('underscore')
 
 //LANDING
 router.get("/", function(req, res) {
-    res.render("landing");
+    Campground.find({}, {image: 1}, (err, campgrounds) => {
+        if(err) {
+            req.flash('problem', 'Problem getting campgrounds.')
+        } else {
+            random_camps = _.sample(campgrounds, 5);
+            res.render("landing", {campgrounds: _.sample(campgrounds, 5)});
+        }
+    });
 });
 
 //REGISTER

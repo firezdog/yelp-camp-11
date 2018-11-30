@@ -6,7 +6,13 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Welcome To Yelp Camp!</title>
 </head>
-<body>
+<body class="darkBackground">
+
+    <% if (problem.length > 0) { %>
+    <div class="alert alert-warning">
+        <%= problem %>
+    </div>
+    <%}%>
 
     <div class="container-fluid" id="welcome-message" style="position: absolute; z-index: 1">
         <h1 class="shadowed">Welcome To YelpCamp</h1>
@@ -15,11 +21,9 @@
 
     <div id="camp-carousel" class="carousel slide carousel-fade" data-ride="carousel">
         <div class="carousel-inner">
-            <div class="carousel-item active" style="background-image: url('/landing_images/camp1.jpeg')"></div>
-            <div class="carousel-item" style="background-image: url('/landing_images/camp2.jpeg')"></div>
-            <div class="carousel-item" style="background-image: url('/landing_images/camp3.jpeg')"></div>
-            <div class="carousel-item" style="background-image: url('/landing_images/camp4.jpeg')"></div>
-            <div class="carousel-item" style="background-image: url('/landing_images/camp5.jpeg')"></div>
+            <% campgrounds.forEach(function(campground, i) { %>
+                <div class="carousel-item <% if (i == 0) {%> active <% } %> darkBackground" style="background-image: url('<%=campground.image%>')"></div>
+            <% }); %>
         </div>
     </div>
 
