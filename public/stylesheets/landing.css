@@ -6,6 +6,8 @@
     margin-top: 20%;
     text-align: center;
     color: white;
+    position: absolute; 
+    z-index: 1
 }
 
 #welcome-message button {
