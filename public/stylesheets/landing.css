@@ -2,12 +2,12 @@
     background-color: #011315;
 }
 
-#welcome-message {
-    margin-top: 20%;
+#landing-header {
+    z-index: 1;
+    position: relative;
     text-align: center;
+    padding-top: 40vh;
     color: white;
-    position: absolute; 
-    z-index: 1
 }
 
 #welcome-message button {
@@ -16,19 +16,39 @@
 }
 
 .shadowed {
-    text-shadow: 2px 2px black;
+    text-shadow: 2px 2px purple;
 }
 
-.carousel-item {
-    background-color: #011315;
-    background-position: center; 
+.slideshow {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: 0;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.slideshow li {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-size: cover;
+    background-position: 50% 50%;
     background-repeat: no-repeat;
-    background-size: contain; 
-    margin-top: 3%;
-    height: 85vh;
+    opacity: 0;
+    z-index: 0;
 }
 
 .alert {
     text-align: center;
     font-size: 1.25em;
+}
+
+.no-cssanimations .slideshow li {
+    opacity: 1;
 }

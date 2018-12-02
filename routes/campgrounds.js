@@ -72,7 +72,6 @@ router.put("/:id/update", check.isCampOwner, function(req,res) {
 //DELETE SUBMISSION
 
 router.delete("/:id/delete", check.isCampOwner, function(req,res){
-    console.log("delete route");
     var id = req.params.id;
     Campground.findByIdAndRemove(id, function(err){
         if(err){
