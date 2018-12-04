@@ -26,8 +26,9 @@ router.post("/", check.isLoggedIn, function(req, res) {
     var name = req.body.name;
     var image = req.body.image;
     var description = req.body.description;
+    var price = req.body.price;
     author = {id: req.user.id, username: req.user.username};
-    var newCampground = {name: name, image: image, description: description, author: author};
+    var newCampground = {name, image, description, author, price};
     Campground.create(newCampground, function(err, campground) {
         if(err) {
             req.flash('problem', 'Problem creating campground.')
