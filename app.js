@@ -13,6 +13,7 @@ var commentRoutes = require("./routes/comments");
 var campgroundRoutes = require("./routes/campgrounds");
 var indexRoutes = require("./routes/index");
 
+// change this
 mongoose.connect(`mongodb://root:root1234@ds225294.mlab.com:25294/yelp_camp`);
 
 app.use(methodOverride("_method"));
@@ -50,6 +51,6 @@ app.use(indexRoutes);
 app.use("/campgrounds", campgroundRoutes);
 app.use("/campgrounds/:id/comments", commentRoutes);
 
-app.listen(8000, process.env.IP, function() {
+app.listen(process.env.PORT || 8000, process.env.IP, function() {
     console.log("YelpCamp Server has started on port 8000.");
 });
