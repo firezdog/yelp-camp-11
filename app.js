@@ -13,7 +13,7 @@ var commentRoutes = require("./routes/comments");
 var campgroundRoutes = require("./routes/campgrounds");
 var indexRoutes = require("./routes/index");
 
-mongoose.connect("mongodb://localhost/yelp_camp");
+mongoose.connect(`mongodb://root:root1234@ds225294.mlab.com:25294/yelp_camp`);
 
 app.use(methodOverride("_method"));
 app.use(flash());
